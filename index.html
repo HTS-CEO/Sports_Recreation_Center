@@ -1691,22 +1691,36 @@
     <!-- Two Image Cards -->
     <div class="game-room" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto;">
         <!-- Image 1 -->
-        <div class="room-card" style="background: linear-gradient(135deg, #2c3e50, #34495e); border-radius: 20px; overflow: hidden; transition: all 0.4s; box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 1px solid rgba(231,76,60,0.2);">
+        <div class="room-card" style="background: linear-gradient(135deg, #2c3e50, #34495e); border-radius: 20px; overflow: hidden; transition: all 0.4s; box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 1px solid rgba(231,76,60,0.2); cursor: pointer;" onclick="openImageModal('img.jpeg')">
             <div class="room-image" style="position:relative; overflow:hidden; height: 350px;">
-                <img src="img.jpeg" alt="Basketball Court" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;">
+                <img src="img2copy.jpeg" alt="Basketball Court" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;">
+                <div class="image-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.5)); padding: 15px; color: white; text-align: center;">
+                    <i class="fas fa-search-plus" style="font-size: 24px;"></i>
+                    <p style="margin-top: 5px; font-size: 14px;">Click to enlarge</p>
+                </div>
             </div>
-            
         </div>
         
         <!-- Image 2 -->
-        <div class="room-card" style="background: linear-gradient(135deg, #2c3e50, #34495e); border-radius: 20px; overflow: hidden; transition: all 0.4s; box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 1px solid rgba(231,76,60,0.2);">
+        <div class="room-card" style="background: linear-gradient(135deg, #2c3e50, #34495e); border-radius: 20px; overflow: hidden; transition: all 0.4s; box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 1px solid rgba(231,76,60,0.2); cursor: pointer;" onclick="openImageModal('img1.jpeg')">
             <div class="room-image" style="position:relative; overflow:hidden; height: 350px;">
                 <img src="img1.jpeg" alt="Gaming Floor" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;">
+                <div class="image-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.5)); padding: 15px; color: white; text-align: center;">
+                    <i class="fas fa-search-plus" style="font-size: 24px;"></i>
+                    <p style="margin-top: 5px; font-size: 14px;">Click to enlarge</p>
+                </div>
             </div>
-            
         </div>
     </div>
 </section>
+
+<!-- Image Preview Modal -->
+<div id="imageModal" class="modal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); overflow: auto;">
+    <div class="modal-content" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+        <span class="close-modal" onclick="closeImageModal()" style="position: absolute; top: 20px; right: 30px; color: white; font-size: 35px; font-weight: bold; cursor: pointer;">&times;</span>
+        <img id="modalImage" src="" alt="Preview" style="max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 8px;">
+    </div>
+</div>
 
 <style>
     .room-card:hover {
@@ -1716,6 +1730,15 @@
     
     .room-card:hover img {
         transform: scale(1.05);
+    }
+    
+    .image-overlay {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .room-card:hover .image-overlay {
+        opacity: 1;
     }
     
     @media (max-width: 768px) {
@@ -1735,6 +1758,31 @@
     }
 </style>
 
+<script>
+    // Image Modal Functions
+    function openImageModal(imageSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        
+        modal.style.display = "flex";
+        modalImg.src = imageSrc;
+        document.body.style.overflow = "hidden";
+    }
+    
+    function closeImageModal() {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+    
+    // Close modal when clicking outside the image
+    window.onclick = function(event) {
+        const modal = document.getElementById('imageModal');
+        if (event.target == modal) {
+            closeImageModal();
+        }
+    }
+</script>
     <section class="giving-back-section" style="background: linear-gradient(135deg, #2c3e50, #34495e); padding: 100px 5%;">
     <div class="section-header">
         <div class="section-tag" style="background: linear-gradient(135deg, #e74c3c, #f39c12); color: white; padding: 10px 25px; border-radius: 25px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block; margin-bottom: 20px;">COMMUNITY</div>
